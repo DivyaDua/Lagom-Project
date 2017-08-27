@@ -18,6 +18,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hello-lagom-stream-impl-build.iml" filepath="$PROJECT_DIR$/.idea/modules/hello-lagom-stream-impl-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-api/user-api.iml" filepath="$PROJECT_DIR$/user-api/user-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-api-build.iml" filepath="$PROJECT_DIR$/.idea/modules/user-api-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-consumer-api/user-consumer-api.iml" filepath="$PROJECT_DIR$/user-consumer-api/user-consumer-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-consumer-api-build.iml" filepath="$PROJECT_DIR$/.idea/modules/user-consumer-api-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-consumer-impl/user-consumer-impl.iml" filepath="$PROJECT_DIR$/user-consumer-impl/user-consumer-impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-consumer-impl-build.iml" filepath="$PROJECT_DIR$/.idea/modules/user-consumer-impl-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-impl/user-impl.iml" filepath="$PROJECT_DIR$/user-impl/user-impl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-impl-build.iml" filepath="$PROJECT_DIR$/.idea/modules/user-impl-build.iml" />
     </modules>

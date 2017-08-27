@@ -1,7 +1,6 @@
 package com.example.user.api
 
 import akka.NotUsed
-import com.example.hello.api.{GreetingMessageChanged, HellolagomService}
 import com.lightbend.lagom.scaladsl.api.broker.Topic
 import com.lightbend.lagom.scaladsl.api.transport.Method
 import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
@@ -15,22 +14,21 @@ trait UserService extends Service {
 
   def testUser(): ServiceCall[NotUsed, UserData]
 
+  def usersTopic(): Topic[UserDataChanged]
+
   override final def descriptor: Descriptor = {
 
     import Service._
-    named("welcome")
+    named("user")
       .withCalls(
         restCall(Method.GET, "/user-data/api", testUser _),
         restCall(Method.GET,"/user/api/:username", greetUser _)
       )
-      .withAutoAcl(true)
       .withTopics(
         topic(TOPIC_NAME, usersTopic _)
       )
-    // @formatter:on
+      .withAutoAcl(true)
   }
-
-  def usersTopic(): Topic[UserData]
 
 }
 
@@ -39,5 +37,13 @@ case class UserData(userId: Int, id: Int, title:String, body: String)
 object UserData {
 
   implicit val format: Format[UserData] = Json.format[UserData]
+
+}
+
+case class UserDataChanged(userId: Int, id: Int, title:String, body: String)
+
+object UserDataChanged {
+
+  implicit val format: Format[UserDataChanged] = Json.format[UserDataChanged]
 
 }

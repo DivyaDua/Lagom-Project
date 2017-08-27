@@ -94,5 +94,31 @@ lazy val `hello-lagom-consumer-impl` = (project in file("hello-lagom-consumer-im
   .settings(lagomForkedTestSettings: _*)
   .dependsOn(`hello-lagom-consumer-api`, `hello-lagom-api`, `hello-lagom-impl`)
 
+lazy val `user-consumer-api` = (project in file("user-consumer-api"))
+  .settings(
+    libraryDependencies ++= Seq(
+      lagomScaladslApi
+    )
+  )
+
+lazy val `user-consumer-impl` = (project in file("user-consumer-impl"))
+  .enablePlugins(LagomScala)
+  .settings(
+    libraryDependencies ++= Seq(
+      lagomScaladslPersistenceCassandra,
+      lagomScaladslKafkaBroker,
+      lagomScaladslTestKit,
+      lagomScaladslKafkaClient,
+      lagomScaladslBroker,
+      macwire,
+      scalaTest
+    )
+  )
+  .settings(lagomForkedTestSettings: _*)
+  .dependsOn(`user-consumer-api`, `user-api`, `user-impl`)
+
 
 lagomUnmanagedServices in ThisBuild := Map("external-user-service" -> "https://jsonplaceholder.typicode.com:443")
+
+lagomKafkaEnabled in ThisBuild := false
+lagomKafkaAddress in ThisBuild := "localhost:9092"

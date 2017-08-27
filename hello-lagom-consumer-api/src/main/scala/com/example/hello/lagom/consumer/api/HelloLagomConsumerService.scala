@@ -10,7 +10,7 @@ trait HelloLagomConsumerService extends Service {
   override def descriptor: Descriptor = {
     import Service._
 
-    named("wordCounts").withCalls(
+    named("hello-consumer-service").withCalls(
       restCall(Method.GET, "/hello-consumer/api/", getValue _),
       restCall(Method.POST, "/hello-consumer/api/", postValue _)
     ).withAutoAcl(true)

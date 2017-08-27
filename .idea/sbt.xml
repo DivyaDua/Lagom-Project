@@ -23,6 +23,10 @@
             <option value="$PROJECT_DIR$/project" />
             <option value="$PROJECT_DIR$/user-api" />
             <option value="$PROJECT_DIR$/user-api/project" />
+            <option value="$PROJECT_DIR$/user-consumer-api" />
+            <option value="$PROJECT_DIR$/user-consumer-api/project" />
+            <option value="$PROJECT_DIR$/user-consumer-impl" />
+            <option value="$PROJECT_DIR$/user-consumer-impl/project" />
             <option value="$PROJECT_DIR$/user-impl" />
             <option value="$PROJECT_DIR$/user-impl/project" />
           </set>
