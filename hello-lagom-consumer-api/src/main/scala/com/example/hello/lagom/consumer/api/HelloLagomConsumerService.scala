@@ -11,12 +11,10 @@ trait HelloLagomConsumerService extends Service {
     import Service._
 
     named("hello-consumer-service").withCalls(
-      restCall(Method.GET, "/hello-consumer/api/", getValue _),
       restCall(Method.POST, "/hello-consumer/api/", postValue _)
     ).withAutoAcl(true)
   }
 
-  def getValue(): ServiceCall[NotUsed, String]
-
   def postValue(): ServiceCall[NotUsed, String]
+
 }

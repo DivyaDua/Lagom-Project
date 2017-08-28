@@ -25,14 +25,14 @@ class UserLoader extends LagomApplicationLoader {
 
 abstract class UserApplication(context: LagomApplicationContext)
   extends LagomApplication(context)
-    with CassandraPersistenceComponents
-    with LagomKafkaComponents
+   // with CassandraPersistenceComponents
+    //with LagomKafkaComponents
     with AhcWSComponents {
 
   // Bind the service that this server provides
   override lazy val lagomServer: LagomServer = serverFor[UserService](wire[UserServiceImpl])
 
-  override lazy val jsonSerializerRegistry = UserSerializerRegistry
+  //override lazy val jsonSerializerRegistry = UserSerializerRegistry
 
   //Bind external service
   lazy val externalUserService: ExternalUserService = serviceClient.implement[ExternalUserService]

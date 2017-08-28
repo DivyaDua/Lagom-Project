@@ -23,12 +23,6 @@ class HelloLagomConsumerServiceImpl(hellolagomService: HellolagomService)(implic
     println("Message is being consumed")
   }
 
-
-  def getValue(): ServiceCall[NotUsed, String] = ServiceCall{_ =>
-    println("Inside get value method.")
-    Future.successful("Done")
-  }
-
   def postValue(): ServiceCall[NotUsed, String] = ServiceCall{_ =>
     println("Inside post value method.")
     Future.successful("Done")

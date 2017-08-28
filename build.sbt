@@ -120,5 +120,6 @@ lazy val `user-consumer-impl` = (project in file("user-consumer-impl"))
 
 lagomUnmanagedServices in ThisBuild := Map("external-user-service" -> "https://jsonplaceholder.typicode.com:443")
 
+/*
 lagomKafkaEnabled in ThisBuild := false
-lagomKafkaAddress in ThisBuild := "localhost:9092"
+lagomKafkaAddress in ThisBuild := "localhost:9092"*/

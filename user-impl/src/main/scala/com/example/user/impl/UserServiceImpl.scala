@@ -1,30 +1,35 @@
 package com.example.user.impl
 
 import akka.NotUsed
-import com.example.user.api
+import akka.actor.{ActorRef, ActorSystem}
 import com.example.user.api.{ExternalUserService, UserData, UserService}
 import com.lightbend.lagom.scaladsl.api.ServiceCall
-import com.lightbend.lagom.scaladsl.api.broker.Topic
-import com.lightbend.lagom.scaladsl.broker.TopicProducer
-import com.lightbend.lagom.scaladsl.persistence.{AggregateEvent, AggregateEventTag, EventStreamElement, PersistentEntityRegistry}
-import com.lightbend.lagom.scaladsl.playjson.{JsonSerializer, JsonSerializerRegistry}
-import play.api.libs.json.{Format, Json}
-
-import scala.collection.immutable.Seq
+import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
 
-class UserServiceImpl(persistentEntityRegistry: PersistentEntityRegistry,externalUserService: ExternalUserService)(implicit ec: ExecutionContext) extends UserService {
+class UserServiceImpl(externalUserService: ExternalUserService)(implicit ec: ExecutionContext) extends UserService {
 
-  override def greetUser(username: String): ServiceCall[NotUsed, String] = ServiceCall{ _ =>
+  val Ping = "ping"
+
+  val system = ActorSystem("userActorSystem")
+  val userActor: ActorRef = system.actorOf(UserActor.props(externalUserService))
+
+  system.scheduler.schedule(50.milliseconds,
+    10.seconds,
+    userActor,
+    Ping)
+
+  override def greetUser(username: String): ServiceCall[NotUsed, String] = ServiceCall { _ =>
     Future.successful(s"Welcome $username!")
   }
 
   override def testUser() = ServiceCall { _ =>
     val result: Future[UserData] = externalUserService.getUser().invoke()
-    result.map(response => response)
+    result.map(response => response.toString)
   }
 
-  override def usersTopic(): Topic[api.UserDataChanged] =
+}
+  /*override def usersTopic(): Topic[api.UserDataChanged] =
     TopicProducer.singleStreamWithOffset {
       fromOffset =>
         persistentEntityRegistry.eventStream(UserEvent.Tag, fromOffset)
@@ -59,4 +64,4 @@ object UserSerializerRegistry extends JsonSerializerRegistry {
     JsonSerializer[UserData],
     JsonSerializer[UserDataChanged]
   )
-}
+}*/
